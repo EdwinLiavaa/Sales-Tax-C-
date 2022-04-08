@@ -94,10 +94,10 @@ int main(int argc, char* argv[])
     int items; // holds the quantity
     string prod; // holds the products
     double itemprice; // holds itemprice read from file
-    double tax; // holds item tax
-    double taxtotal = 0.00; // holds total tax
-    double subtotal = 0.00; // holds total itemprice
-    double grantTotal= 0.00; // holds gross subtotal+tax
+    double tax = 0.0; // holds item tax
+    double taxtotal = 0.0; // holds total tax
+    double subtotal = 0.0; // holds total itemprice
+    double grantTotal= 0.0; // holds gross subtotal+tax
 
     while(getline(in, line)) 
         {
@@ -137,71 +137,84 @@ int main(int argc, char* argv[])
         prod = vr[n].product;
         itemprice = vr[n].price;
 
-        if (prod == "book") 
+        if (prod == " book") 
         {
             decision = ITEM_WITH_NOSALESTAX_AND_NOIMPORTDUTY;
         }
-        else if (prod == "music cd")
+        else if (prod == " music cd")
         {
             decision = ITEM_WITH_SALESTAX_AND_NOIMPORTDUTY;
         }
-        else if (prod == "chocolate bar")
+        else if (prod == " chocolate bar")
         {
             decision = ITEM_WITH_NOSALESTAX_AND_NOIMPORTDUTY;
         }
-        else if (prod == "imported box of chocolates")
+        else if (prod == " imported box of chocolates")
         {
             decision = ITEM_WITH_NOSALESTAX_ONLY_IMPORTDUTY;
         }
-        else if (prod == "imported bottle of perfume")
+        else if (prod == " imported bottle of perfume")
         {
             decision = ITEM_WITH_SALESTAX_AND_IMPORTDUTY;
         }
-        else if (prod == "bottle of perfume")
+        else if (prod == " bottle of perfume")
         {
             decision = ITEM_WITH_SALESTAX_AND_NOIMPORTDUTY;
         }
-        else if (prod == "packet of headache pills")
+        else if (prod == " packet of headache pills")
         {
             decision = ITEM_WITH_NOSALESTAX_AND_NOIMPORTDUTY;
         }
-        else if (prod == "box of imported chocolates")
+        else if (prod == " box of imported chocolates")
         {
             decision = ITEM_WITH_NOSALESTAX_ONLY_IMPORTDUTY;
+        }
+        else {
+            cout << "New Product Not Found!" << endl;
         }
 
         switch(decision) {
 
             case 1: //ITEM_WITH_NOSALESTAX_AND_NOIMPORTDUTY
 
+                tax = ComputeSalesTax(itemprice,0.0,0.0);
+                itemprice = itemprice + tax;
+
             break;
 
             case 2: //ITEM_WITH_NOSALESTAX_ONLY_IMPORTDUTY
+
+                tax = ComputeSalesTax(itemprice,0.0,IMPORT_DUTY_RATE);
+                itemprice = itemprice + tax;
                 
             break;
 
             case 3: //ITEM_WITH_SALESTAX_AND_NOIMPORTDUTY
+
+                tax = ComputeSalesTax(itemprice,SALES_TAX_RATE,0.0);
+                itemprice = itemprice + tax;
                 
             break;
 
             case 4: //ITEM_WITH_SALESTAX_AND_IMPORTDUTY
+
+                tax = ComputeSalesTax(itemprice,SALES_TAX_RATE,IMPORT_DUTY_RATE);
+                itemprice = itemprice + tax;
                 
             break;
 
             default:
-                cout << "Product Unknown" << endl;
-                exit(1);
+                cout << "New Product Not Found!" << endl;
                
         }
-            
+
         cout << items << "," << prod << ", "
              << itemprice << endl;
              
     }    
 
-    cout << fixed << setprecision(2);
-    cout << endl << "Sales Taxes: " << taxtotal << endl;
-    cout << "Total: " << subtotal << endl << endl; 
+    cout << endl << "Sales Taxes: " << tax << endl;
+    cout << "Total: " << grantTotal << endl << endl; 
 
     return 0;
 }
