@@ -91,13 +91,13 @@ int main(int argc, char* argv[])
     
     // calculations
     int decision; // holds decision on how to apply sales tax
-    int items; // holds the quantity
+    int numofitems; // holds the quantity
     string prod; // holds the products
     double itemprice; // holds itemprice read from file
     double tax = 0.0; // holds item tax
     double taxtotal = 0.0; // holds total tax
     double subtotal = 0.0; // holds total itemprice
-    double grantTotal= 0.0; // holds gross subtotal+tax
+    double grandTotal= 0.0; // holds gross subtotal+tax
 
     while(getline(in, line)) 
         {
@@ -133,7 +133,7 @@ int main(int argc, char* argv[])
 
     for(size_t n=0; n<vr.size(); ++n)
     {
-        items = vr[n].quantity;
+        numofitems = vr[n].quantity;
         prod = vr[n].product;
         itemprice = vr[n].price;
 
@@ -179,6 +179,7 @@ int main(int argc, char* argv[])
 
                 tax = ComputeSalesTax(itemprice,0.0,0.0);
                 itemprice = itemprice + tax;
+                subtotal = subtotal + itemprice;
 
             break;
 
@@ -186,6 +187,7 @@ int main(int argc, char* argv[])
 
                 tax = ComputeSalesTax(itemprice,0.0,IMPORT_DUTY_RATE);
                 itemprice = itemprice + tax;
+                subtotal = subtotal + itemprice;
                 
             break;
 
@@ -193,6 +195,7 @@ int main(int argc, char* argv[])
 
                 tax = ComputeSalesTax(itemprice,SALES_TAX_RATE,0.0);
                 itemprice = itemprice + tax;
+                subtotal = subtotal + itemprice;
                 
             break;
 
@@ -200,21 +203,24 @@ int main(int argc, char* argv[])
 
                 tax = ComputeSalesTax(itemprice,SALES_TAX_RATE,IMPORT_DUTY_RATE);
                 itemprice = itemprice + tax;
-                
+                subtotal = subtotal + itemprice;
+          
             break;
 
             default:
-                cout << "New Product Not Found!" << endl;
-               
+                cout << "New Product Not Found!" << endl;          
         }
 
-        cout << items << "," << prod << ", "
-             << itemprice << endl;
-             
-    }    
+        cout << fixed << setprecision(2);
+        cout << numofitems << "," << prod << ", "
+             << itemprice << endl;             
+    } 
 
+    grandTotal = grandTotal + subtotal;   
+
+    cout << fixed << setprecision(2);
     cout << endl << "Sales Taxes: " << tax << endl;
-    cout << "Total: " << grantTotal << endl << endl; 
+    cout << "Total: " << grandTotal << endl << endl; 
 
     return 0;
 }
