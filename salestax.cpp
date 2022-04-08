@@ -1,3 +1,10 @@
+/*
+ * salestax.cpp
+ *
+ *  Created on: April 8, 2022
+ *  Author: Edwin Liava'a
+ */
+
 #include <iostream>
 #include <sstream> 
 #include <fstream> 
