@@ -90,7 +90,7 @@ int main(int argc, char* argv[])
         return -1;
         }
 
-    // declare the vectors array
+    // declare the vector array
     vector<record> vr;
     vector<string>::iterator itr;
     std::string line; 
