@@ -17,7 +17,7 @@
 #include <math.h>
 using namespace std;
 
-// contant variables
+// constant variables
 
 const int ITEM_WITH_NOSALESTAX_AND_NOIMPORTDUTY = 1;
 const int ITEM_WITH_NOSALESTAX_ONLY_IMPORTDUTY = 2;
