@@ -185,8 +185,8 @@ int main(int argc, char* argv[])
             case 1: //ITEM_WITH_NOSALESTAX_AND_NOIMPORTDUTY
 
                 tax = ComputeSalesTax(itemprice,0.0,0.0);
-                taxtotal = taxtotal + tax;
-                itemprice = itemprice + tax;
+                taxtotal = (taxtotal + tax) * numofitems;
+                itemprice = (itemprice + tax) * numofitems;
                 subtotal = subtotal + itemprice;
 
             break;
@@ -194,8 +194,8 @@ int main(int argc, char* argv[])
             case 2: //ITEM_WITH_NOSALESTAX_ONLY_IMPORTDUTY
 
                 tax = ComputeSalesTax(itemprice,0.0,IMPORT_DUTY_RATE);
-                taxtotal = taxtotal + tax;
-                itemprice = itemprice + tax;
+                taxtotal = (taxtotal + tax) * numofitems;
+                itemprice = (itemprice + tax) * numofitems;
                 subtotal = subtotal + itemprice;
                 
             break;
@@ -203,8 +203,8 @@ int main(int argc, char* argv[])
             case 3: //ITEM_WITH_SALESTAX_AND_NOIMPORTDUTY
 
                 tax = ComputeSalesTax(itemprice,SALES_TAX_RATE,0.0);
-                taxtotal = taxtotal + tax;
-                itemprice = itemprice + tax;
+                taxtotal = (taxtotal + tax) * numofitems;
+                itemprice = (itemprice + tax) * numofitems;
                 subtotal = subtotal + itemprice;
                 
             break;
@@ -212,8 +212,8 @@ int main(int argc, char* argv[])
             case 4: //ITEM_WITH_SALESTAX_AND_IMPORTDUTY
 
                 tax = ComputeSalesTax(itemprice,SALES_TAX_RATE,IMPORT_DUTY_RATE);
-                taxtotal = taxtotal + tax;
-                itemprice = itemprice + tax;
+                taxtotal = (taxtotal + tax) * numofitems;
+                itemprice = (itemprice + tax) * numofitems;
                 subtotal = subtotal + itemprice;
           
             break;
