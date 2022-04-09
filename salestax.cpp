@@ -11,10 +11,10 @@
 #include <vector> 
 #include <string> 
 #include <iomanip>  
-#include <stdlib.h>
 #include <algorithm>
 #include <map>
 #include <math.h>
+#include <stdlib.h>
 using namespace std;
 
 // constant variables
@@ -75,6 +75,16 @@ double ComputeSalesTax(double aPrice, double aRate, double aImportduty)
 {
     double tx = (aPrice * aRate / (double(100))) + (aPrice * aImportduty / (double(100)));
     return RoundOff(tx);
+}
+
+// calculate subtotal
+double ComputeSubTotal(double iPrice, double iTax, double iTotal, int iNumItems)
+{
+    double iTaxTotal = (iTaxTotal + iTax) * iNumItems;
+    double iItemPrice = (iPrice + iTax) * iNumItems;
+    double iSubTotal = iSubTotal + iItemPrice;
+    
+    return RoundOff(iSubTotal);
 }
 
 // function main
@@ -235,5 +245,3 @@ int main(int argc, char* argv[])
 
     return 0;
 }
-
-
