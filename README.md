@@ -5,7 +5,7 @@
 ###
 ### Ideally I could have done it in a more acceptable C++ convention manner but I just wanted to finish the test due to other work commitments.
 ###
-### This is a more ideal approach:
+### An ideal OOP approach would be to devide up salestax.cpp into:
 ### * Item.h
 ### * ItemCreator.h
 ### * InventoryList.h
